@@ -1,7 +1,6 @@
 module github.com/sbazanov/kbot
 
-go 1.21.5
-
+go 1.20
 require (
 	github.com/spf13/cobra v1.8.0
 	gopkg.in/telebot.v3 v3.2.1
