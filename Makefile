@@ -29,6 +29,9 @@ build: format get
 	@printf "$GDetected OS/ARCH: $R$(detected_OS)/$(detected_arch)$D\n"
 	CGO_ENABLED=0 GOOS=$(detected_OS) GOARCH=$(detected_arch) go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
 
+image:
+	docker build . -t ${REGISTRY}/${APP}:${VERSION}-$(detected_arch)
+
 linux: format get
 	@printf "$GTarget OS/ARCH: $Rlinux/$(detected_arch)$D\n"
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(detected_arch) go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
@@ -48,9 +51,6 @@ arm: format get
 	@printf "$GTarget OS/ARCH: $R$(detected_OS)/arm$D\n"
 	CGO_ENABLED=0 GOOS=$(detected_OS) GOARCH=arm go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
 	docker build name=arm -t ${REGISTRY}/${APP}:${VERSION}-$(detected_OS)-arm .
-
-image: build
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-$(detected_arch)
 
 push:
 	docker push ${REGISTRY}/${APP}:${VERSION}-$(detected_arch)
