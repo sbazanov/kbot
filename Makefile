@@ -13,41 +13,41 @@ APP=$(shell basename $(shell git remote get-url origin))
 REGISTRY=sbazanov
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 
-get:
-	go get
+#get:
+#	go get
+#
+#lint:
+#	golint
+#
+#test:
+#	go test -v
+#
+#format:
+#	gofmt -s -w ./
 
-lint:
-	golint
-
-test:
-	go test -v
-
-format:
-	gofmt -s -w ./
-
-build: format get
+build:
 	@printf "$GDetected OS/ARCH: $R$(detected_OS)/$(detected_arch)$D\n"
 	CGO_ENABLED=0 GOOS=$(detected_OS) GOARCH=$(detected_arch) go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
 
 image:
 	docker build . -t ${REGISTRY}/${APP}:${VERSION}-$(detected_arch)
 
-linux: format get
+linux:
 	@printf "$GTarget OS/ARCH: $Rlinux/$(detected_arch)$D\n"
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(detected_arch) go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
 	docker build name=linux -t ${REGISTRY}/${APP}:${VERSION}-linux-$(detected_arch) .
 
-windows: format get
+windows:
 	@printf "$GTarget OS/ARCH: $Rwindows/$(detected_arch)$D\n"
 	CGO_ENABLED=0 GOOS=windows GOARCH=$(detected_arch) go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
 	docker build name=windows -t ${REGISTRY}/${APP}:${VERSION}-windows-$(detected_arch) .
 
-darwin:format get
+darwin:
 	@printf "$GTarget OS/ARCH: $Rdarwin/$(detected_arch)$D\n"
 	CGO_ENABLED=0 GOOS=darwin GOARCH=$(detected_arch) go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
 	docker build name=darwin -t ${REGISTRY}/${APP}:${VERSION}-darwin-$(detected_arch) .
 
-arm: format get
+arm:
 	@printf "$GTarget OS/ARCH: $R$(detected_OS)/arm$D\n"
 	CGO_ENABLED=0 GOOS=$(detected_OS) GOARCH=arm go build -v -o kbot -ldflags "-X="github.com/${REGISTRY}/kbot/cmd.appVersion=${VERSION}
 	docker build name=arm -t ${REGISTRY}/${APP}:${VERSION}-$(detected_OS)-arm .

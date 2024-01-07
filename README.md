@@ -1,1 +1,2 @@
 # kbot
+Telegram Bot app
