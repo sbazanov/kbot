@@ -13,17 +13,17 @@ APP=$(shell basename $(shell git remote get-url origin))
 REGISTRY=sbazanov
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 
-#get:
-#	go get
-#
-#lint:
-#	golint
-#
-#test:
-#	go test -v
-#
-#format:
-#	gofmt -s -w ./
+get:
+	go install
+
+lint:
+	golint
+
+test:
+	go test -v
+
+format:
+	gofmt -s -w ./
 
 build:
 	@printf "$GDetected OS/ARCH: $R$(detected_OS)/$(detected_arch)$D\n"
