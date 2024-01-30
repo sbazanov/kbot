@@ -3,8 +3,8 @@ replicaCount: 1
 image:
   registry: "ghcr.io"
   repository: "sbazanov/kbot"
-  pullPolicy: IfNotPresent  # Дозволяє замінити образ за замовчуванням
-  tag: v1.7.0-ca0aea9
+  pullPolicy: IfNotPresent # Дозволяє замінити образ за замовчуванням
+  tag: v1.7.0-f1a0658
   os: linux
   arch: amd64
   parameter: go
@@ -12,7 +12,7 @@ image:
 secret:
   name: "kbot"
   env: "TELE_TOKEN"
-  key: "token" 
+  key: "token"
   value: "NjU1MjQ2NzQ0OTpBQUZHR3k3WnREdjlpRExmdEx5OV85cDF5U0tNSTNkeU00aw=="
 securityContext:
   privileged: true
