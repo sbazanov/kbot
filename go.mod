@@ -1,4 +1,4 @@
-module github.com/vit-um/kbot
+module github.com/sbazanov/kbot
 
 go 1.20
 
