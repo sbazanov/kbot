@@ -31,11 +31,14 @@ jobs:
 # авторизація на GHCR
 
       - name: 'Login to GitHub Container Registry'
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "${{ secrets.FOR_ACTIONS }}" | docker login ghcr.io -u ${{ github.ACTOR }} --password-stdin
+
+#      - name: 'Login to GitHub Container Registry'
+#        uses: docker/login-action@v3
+#        with:
+#          registry: ghcr.io
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
 
 # збираємо образ з використання змінної середовища 
       - name: Build&Push
