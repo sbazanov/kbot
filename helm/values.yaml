@@ -4,7 +4,7 @@ image:
   registry: "ghcr.io"
   repository: "sbazanov/kbot"
   pullPolicy: IfNotPresent  # Дозволяє замінити образ за замовчуванням
-  tag: v1.7.0-ca0aea9-amd64
+  tag: v1.7.0-ca0aea9
   os: linux
   arch: amd64
   parameter: go
