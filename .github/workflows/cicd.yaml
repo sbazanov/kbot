@@ -18,7 +18,7 @@ jobs:
 
     permissions:
       contents: 'read'
-      id-token: 'write'
+      packages: 'write'
 # перший крок задачі дозволить запускати на ранері репозиторій із скриптами для виконання дії. 
     steps:
       - name: Checkout
